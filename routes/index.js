@@ -12,7 +12,7 @@ router.get('/about', function(req, res, next) {
     res.render('about', { name: 'My awesome site' });
 });
 
-
+/* test gitignore */
 router.get('/convert', function(req, res, next) {
     var query = req.query;
 
