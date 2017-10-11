@@ -9,25 +9,58 @@ router.get('/', function(req, res, next) {
 
 /* GET about page. */
 router.get('/about', function(req, res, next) {
-    res.render('about', { name: 'My awesome site' });
+    res.render('about', { name: 'Jeremy', description: 'Lab7 Node/Express simple currency application.' });
 });
 
 /* test gitignore */
 router.get('/convert', function(req, res, next) {
 
-    var dollars = req.query.dollars;
+    var currency = req.query.currency;
     var toCurrency = req.query.to_currency;
+    var fromCurrency = req.query.from_currency;
+    var cRate;
 
-    console.log('dollars = ' + dollars);
-    console.log('toCurrency = ' + toCurrency);
+    if (fromCurrency === "EUR" && toCurrency === "USD") {
+        cRate = "EtD";
+    }
+    if (fromCurrency === "EUR" && toCurrency === "JPY") {
+        cRate = "EtY";
+    }
+    if (fromCurrency === "EUR" && toCurrency === "EUR") {
+        cRate = "EtE";
+    }
+    if (fromCurrency === "USD" && toCurrency === "USD") {
+        cRate = "DtD";
+    }
+    if (fromCurrency === "USD" && toCurrency === "JPY") {
+        cRate = "DtY";
+    }
+    if (fromCurrency === "USD" && toCurrency === "EUR") {
+        cRate = "DtE";
+    }
+    if (fromCurrency === "JPY" && toCurrency === "USD") {
+        cRate = "YtD";
+    }
+    if (fromCurrency === "JPY" && toCurrency === "JPY") {
+        cRate = "YtY";
+    }
+    if (fromCurrency === "JPY" && toCurrency === "EUR") {
+        cRate = "YtE";
+    }
 
-    var converted = dollars * exchangerates[toCurrency];
 
-    console.log('converted = ' + converted);
+    //console.log('dollars = ' + dollars);
+    //console.log('toCurrency = ' + toCurrency);
+
+    var converted = currency * exchangerates[cRate];
+
+    //console.log('converted = ' + converted);
+
 
     res.render('results', {
-        dollars: dollars,
+        currency: currency,
         toCurrency: toCurrency,
+        fromCurrency: fromCurrency,
         converted: converted}
     );
 });
