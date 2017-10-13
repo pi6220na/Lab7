@@ -74,6 +74,12 @@ router.get('/convert', function(req, res, next) {
 
     var converted = currency * exchangerates[cRate];
 
+    for (item in exchangerates) {
+        console.log("item = " + item);
+        console.log("exchangerates[item] = " + exchangerates[item])
+    }
+
+
     //console.log('converted = ' + converted);
 
 
